@@ -9,6 +9,9 @@ import { UsersWsController } from './users-ws.controller';
 // Services
 import { UsersWsService } from './users-ws.service';
 
+// Modules
+import { RolesModule } from './roles/roles.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -22,6 +25,7 @@ import { UsersWsService } from './users-ws.service';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    RolesModule,
   ],
   controllers: [UsersWsController],
   providers: [UsersWsService],
