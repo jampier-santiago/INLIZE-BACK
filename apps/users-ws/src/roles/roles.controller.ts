@@ -1,22 +1,23 @@
 // Packages
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 
 // Services
 import { RolesService } from './roles.service';
 
 // DTO's
 import { CreateRoleDto } from './dto/create-role.dto';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller('roles')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
-  @Post()
-  create(@Body() createRoleDto: CreateRoleDto) {
+  @MessagePattern({ cmd: 'create_role' })
+  create(@Payload() createRoleDto: CreateRoleDto) {
     return this.rolesService.create(createRoleDto);
   }
 
-  @Get()
+  @MessagePattern({ cmd: 'find_all_role' })
   findAll() {
     return this.rolesService.findAll();
   }

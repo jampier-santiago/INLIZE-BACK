@@ -1,20 +1,17 @@
-import {
-  BadRequestException,
-  InternalServerErrorException,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+//Packages
+import { HttpStatus } from '@nestjs/common';
+import { RpcException } from '@nestjs/microservices';
 
 export const handleDBExceptions = (error: any) => {
-  // console.log(error);
   // Error para datos duplicados
-  if (error.code === '23505') throw new BadRequestException(error.detail);
+  if (error.code === '23505')
+    throw new RpcException({
+      message: error.detail,
+      status: HttpStatus.BAD_REQUEST,
+    });
 
-  if (error.status === 400) throw new BadRequestException(error.message);
-
-  if (error.status === 404) throw new NotFoundException(error.message);
-
-  if (error.status === 401) throw new UnauthorizedException(error.message);
-
-  throw new InternalServerErrorException('Unexpected error, check server logs');
+  throw new RpcException({
+    message: error.message,
+    status: error.status,
+  });
 };
