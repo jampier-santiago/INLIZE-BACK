@@ -12,6 +12,7 @@ import { UsersWsService } from './users-ws.service';
 // Modules
 import { RolesModule } from './roles/roles.module';
 import { TeamsModule } from './teams/teams.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { TeamsModule } from './teams/teams.module';
     }),
     RolesModule,
     TeamsModule,
+    UsersModule,
   ],
   controllers: [UsersWsController],
   providers: [UsersWsService],

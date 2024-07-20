@@ -28,7 +28,9 @@ export class RolesService {
     const { name } = createRoleDto;
 
     try {
-      const { id, name: roleName } = await this.roleRepository.save({ name });
+      const role = await this.roleRepository.create({ name });
+
+      const { id, name: roleName } = await this.roleRepository.save(role);
 
       return { data: { id, name: roleName } };
     } catch (error) {

@@ -11,9 +11,10 @@ import { AppService } from './app.service';
 // Modules
 import { RolesModule } from './roles/roles.module';
 import { TeamsModule } from './teams/teams.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), RolesModule, TeamsModule],
+  imports: [ConfigModule.forRoot(), RolesModule, TeamsModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
