@@ -1,73 +1,89 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# :rocket: Backend para prueba técnica en INLAZE
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este repositorio contiene el código backend desarrollado para la prueba técnica de Inlaze. El backend está implementado utilizando **NestJS** y sigue una **arquitectura de microservicios**, estructurado de la siguiente manera:
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- **client-gateway**: Actúa como puerta de enlace para la comunicación entre los microservicios y los clientes.
+- **projects-ws**: Gestiona todas las operaciones relacionadas con los proyectos.
+- **users-ws**: Maneja la administración de usuarios y sus respectivas funciones.
 
-## Description
+El backend está conectado a una **base de datos PostgreSQL**, la cual se ejecuta en un contenedor de **Docker** para asegurar una fácil configuración y despliegue.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+```
+-> Contexto del Desarrollo
 
-## Installation
-
-```bash
-$ npm install
+El objetivo de este proyecto es desarrollar una aplicación web para la gestión de tareas, que permita a los usuarios colaborar de manera eficiente. Esta aplicación está diseñada para mejorar la productividad y facilitar la organización de tareas entre equipos.
 ```
 
-## Running the app
+## :card_index_dividers: Tabla de Contenidos
+
+1. [Descripción](#descripción)
+2. [Instalación](#instalación)
+3. [Uso](#uso)
+
+## :open_book: Descripción
+
+El proyecto está desarrollado en **NestJS**, utilizando una **arquitectura de microservicios**. El backend está conectado a una base de datos **PostgreSQL**, la cual se ejecuta en un contenedor de **Docker** para asegurar una fácil configuración y despliegue.
+
+El sistema implementa autenticación con **JWT (JSON Web Tokens)**, además de gestionar los permisos según el nivel de acceso de cada rol.
+
+Para la interacción con la base de datos, se utilizó **TypeORM**.
+
+## :hammer_and_wrench: Instalación
+
+Para poder instalar y utilizar este proyecto, se deben seguir los siguientes pasos:
+
+1. Clonar el proyecto.
+
+2. Instalar los módulos de Node.
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Test
+3. Configurar las variables de entorno.
+
+> **_En el archivo .env.template se encontrara una plantilla para entender el contenido del archivo .env_**
+
+- `env.ts`
+
+4. Colocar a correr docker
+
+5. Subir el contenedor de docker.
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+docker compose up -d
 ```
 
-## Support
+6. Ejecutar el proyecto.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+npm run start:dev
+```
 
-## Stay in touch
+> **_Por defecto corre el gateway, para colocar a correr los microservicios utilizar el siguiente comando_**
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+npm run start:dev {{nombre del microservicio a correr}}
+```
 
-## License
+## :computer: Uso
 
-Nest is [MIT licensed](LICENSE).
+- Para ejecutar el gateway.
+
+```bash
+npm run start:dev client-gateway
+```
+
+- Para ejecutar cada uno de los microservicios
+
+> Proyectos
+
+```bash
+npm run start:dev projects-ws
+```
+
+> Usuarios
+
+```bash
+npm run start:dev users-ws
+```
