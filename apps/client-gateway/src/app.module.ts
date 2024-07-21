@@ -17,9 +17,10 @@ import { ProjectsXUsersModule } from './projects-x_users/projects-x_users.module
 import { StatusTasksModule } from './status-tasks/status-tasks.module';
 import { TasksModule } from './tasks/tasks.module';
 import { CommentsModule } from './comments/comments.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), RolesModule, TeamsModule, UsersModule, ProjectsModule, ProjectsXUsersModule, StatusTasksModule, TasksModule, CommentsModule],
+  imports: [ConfigModule.forRoot(), RolesModule, TeamsModule, UsersModule, ProjectsModule, ProjectsXUsersModule, StatusTasksModule, TasksModule, CommentsModule, NotificationsModule],
   controllers: [AppController],
   providers: [AppService],
 })

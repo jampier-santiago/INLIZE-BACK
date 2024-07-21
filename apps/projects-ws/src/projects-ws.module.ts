@@ -15,6 +15,7 @@ import { ProjectsXUsersModule } from './projects-x_users/projects-x_users.module
 import { StatusTasksModule } from './status-tasks/status-tasks.module';
 import { TasksModule } from './tasks/tasks.module';
 import { CommentsModule } from './comments/comments.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { CommentsModule } from './comments/comments.module';
     StatusTasksModule,
     TasksModule,
     CommentsModule,
+    NotificationsModule,
   ],
   controllers: [ProjectsWsController],
   providers: [ProjectsWsService],
