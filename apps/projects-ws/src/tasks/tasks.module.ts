@@ -27,5 +27,6 @@ import { TeamsModule } from 'apps/users-ws/src/teams/teams.module';
   ],
   controllers: [TasksController],
   providers: [TasksService],
+  exports: [TypeOrmModule],
 })
 export class TasksModule {}
