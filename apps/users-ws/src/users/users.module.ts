@@ -19,5 +19,6 @@ import { TeamsModule } from '../teams/teams.module';
   imports: [TypeOrmModule.forFeature([User]), RolesModule, TeamsModule],
   controllers: [UsersController],
   providers: [UsersService],
+  exports: [TypeOrmModule],
 })
 export class UsersModule {}

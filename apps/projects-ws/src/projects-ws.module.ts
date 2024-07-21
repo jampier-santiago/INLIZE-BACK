@@ -11,6 +11,7 @@ import { ProjectsWsService } from './projects-ws.service';
 
 // Modules
 import { ProjectsModule } from './projects/projects.module';
+import { ProjectsXUsersModule } from './projects-x_users/projects-x_users.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ProjectsModule } from './projects/projects.module';
       synchronize: true,
     }),
     ProjectsModule,
+    ProjectsXUsersModule,
   ],
   controllers: [ProjectsWsController],
   providers: [ProjectsWsService],

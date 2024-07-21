@@ -13,9 +13,10 @@ import { RolesModule } from './roles/roles.module';
 import { TeamsModule } from './teams/teams.module';
 import { UsersModule } from './users/users.module';
 import { ProjectsModule } from './projects/projects.module';
+import { ProjectsXUsersModule } from './projects-x_users/projects-x_users.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), RolesModule, TeamsModule, UsersModule, ProjectsModule],
+  imports: [ConfigModule.forRoot(), RolesModule, TeamsModule, UsersModule, ProjectsModule, ProjectsXUsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
