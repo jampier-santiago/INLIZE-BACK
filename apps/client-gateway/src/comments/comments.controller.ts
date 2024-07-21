@@ -7,7 +7,9 @@ import {
   Param,
   Delete,
   Inject,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 
@@ -25,6 +27,7 @@ export class CommentsController {
   ) {}
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   create(@Body() createCommentDto: CreateCommentDto) {
     return this.commentsClient
       .send({ cmd: 'create_comment' }, createCommentDto)
@@ -36,6 +39,7 @@ export class CommentsController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   findAll(@Param('id') id: string) {
     return this.commentsClient.send({ cmd: 'find_all_comments' }, { id }).pipe(
       catchError((error) => {
@@ -45,6 +49,7 @@ export class CommentsController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard('jwt'))
   update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
     return this.commentsClient
       .send({ cmd: 'update_comment' }, { id, ...updateCommentDto })
@@ -56,6 +61,7 @@ export class CommentsController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
   remove(@Param('id') id: string) {
     return this.commentsClient.send({ cmd: 'remove_comment' }, { id }).pipe(
       catchError((error) => {

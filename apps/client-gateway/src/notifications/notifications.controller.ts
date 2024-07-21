@@ -7,8 +7,10 @@ import {
   Patch,
   Param,
   Inject,
+  UseGuards,
 } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
+import { AuthGuard } from '@nestjs/passport';
 import { catchError } from 'rxjs';
 
 // DTO's
@@ -26,6 +28,7 @@ export class NotificationsController {
   ) {}
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   create(@Body() createNotificationDto: CreateNotificationDto) {
     return this.notificactionClients
       .send({ cmd: 'create_notification' }, createNotificationDto)
@@ -37,6 +40,7 @@ export class NotificationsController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   findAll(@Param('id') id: string) {
     return this.notificactionClients
       .send({ cmd: 'find_all_notifications' }, { id })
@@ -48,6 +52,7 @@ export class NotificationsController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard('jwt'))
   update(
     @Param('id') id: string,
     @Body() updateNotificationDto: UpdateNotificationDto,

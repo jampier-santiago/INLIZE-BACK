@@ -8,8 +8,10 @@ import {
   Param,
   Delete,
   Inject,
+  UseGuards,
 } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
+import { AuthGuard } from '@nestjs/passport';
 import { catchError } from 'rxjs';
 
 // DTO's
@@ -26,6 +28,7 @@ export class TasksController {
   ) {}
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   create(@Body() createTaskDto: CreateTaskDto) {
     return this.tasksClient.send({ cmd: 'create_task' }, createTaskDto).pipe(
       catchError((error) => {
@@ -35,6 +38,7 @@ export class TasksController {
   }
 
   @Get('project/:id')
+  @UseGuards(AuthGuard('jwt'))
   findAll(@Param('id') id: string) {
     return this.tasksClient.send({ cmd: 'find_all_tasks' }, { id }).pipe(
       catchError((error) => {
@@ -44,6 +48,7 @@ export class TasksController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   findOne(@Param('id') id: string) {
     return this.tasksClient.send({ cmd: 'find_one_task' }, { id }).pipe(
       catchError((error) => {
@@ -53,6 +58,7 @@ export class TasksController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard('jwt'))
   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
     return this.tasksClient
       .send({ cmd: 'update_task' }, { id, ...updateTaskDto })
@@ -64,6 +70,7 @@ export class TasksController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
   remove(@Param('id') id: string) {
     return this.tasksClient.send({ cmd: 'remove_task' }, { id }).pipe(
       catchError((error) => {
