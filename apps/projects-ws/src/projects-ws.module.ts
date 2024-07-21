@@ -12,6 +12,7 @@ import { ProjectsWsService } from './projects-ws.service';
 // Modules
 import { ProjectsModule } from './projects/projects.module';
 import { ProjectsXUsersModule } from './projects-x_users/projects-x_users.module';
+import { StatusTasksModule } from './status-tasks/status-tasks.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ProjectsXUsersModule } from './projects-x_users/projects-x_users.module
     }),
     ProjectsModule,
     ProjectsXUsersModule,
+    StatusTasksModule,
   ],
   controllers: [ProjectsWsController],
   providers: [ProjectsWsService],
